@@ -8,6 +8,9 @@ const serve = require('koa-static');
 const app = new Koa();
 const router = new KoaRouter();
 
+//trying to implement db
+const stuffModel = require('./model/stuff');
+
 //this should be the db
 const things = ['chips', 'tacos', 'cheese']
 
@@ -44,9 +47,13 @@ async function showAdd(ctx){
 }
 //add stuff
 async function add(ctx){
-const body = ctx.request.body;
-things.push(body.thing);
-ctx.redirect('/');
+    const body = ctx.request.body;
+    things.push(body.thing);
+    console.log(body.thing);
+    ctx.redirect('/');
+
+    await stuffModel.add(body.thing); //add stuff to db 
+
 }
 
 router.get('/test', ctx => (ctx.body = 'hello test'));
