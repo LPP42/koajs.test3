@@ -1,16 +1,11 @@
 <h1>remove stuff</h1>
 
-<form action="/remove" method="post" >
-    <input type="text" name="thing" placeholder="add some stuff">
-    <input type="submit" value="add">
-    
-</form>
 
-<!-- <ul>
+<ul>
     <% things.forEach(thing => { %>
-        <li>
-            <%= thing %>
+        <li class="stuffToDelete" id=" <%= thing.stuffId %> ">
+            <button class="btnDelete" id="btnDelete">Delete</button><%= thing.name %> 
         </li>
     <% }); %>
 </ul>
-<a href="/">Cancel</a> -->
+<a href="/">Cancel</a>

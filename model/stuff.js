@@ -23,4 +23,9 @@ Stuff.get = async() => {
     return result;
 }
 
+Stuff.delete = async(stuffId) => {
+    let dbConn = await dbConnPool.getConnection();
+    const rows = await dbConn.query("DELETE FROM `koajs`.`stuff` WHERE  `stuffId`=?;",[stuffId]);
+    dbConn.end();
+}
 module.exports = Stuff;
