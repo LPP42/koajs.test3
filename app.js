@@ -33,6 +33,7 @@ router.get('/', index);
 router.get('/add', showAdd);
 router.post('/add', add);
 router.get('/remove', showRemove);
+router.post('/remove',remove);
 
 //Get stuff
 async function index(ctx) {
@@ -52,7 +53,7 @@ async function add(ctx) {
     const body = ctx.request.body;
     things.push(body.thing);
     console.log(body.thing);
-    ctx.redirect('/');
+    ctx.redirect('/add');
 
     await stuffModel.add(body.thing); //add stuff to db 
 
@@ -63,12 +64,17 @@ async function showRemove(ctx) {
     let listOfStuff = await stuffModel.get();
     await ctx.render('remove', {
         title: 'Remove items',
-        // things: listOfStuff.map(a => a.name)
         things: listOfStuff
     });
 }
 
-
+//remove stuff
+async function remove(ctx) {
+    const body = ctx.request.body;
+    console.log(ctx.request.body.idToDelete);
+    await stuffModel.delete(ctx.request.body.idToDelete); //remove stuff to db 
+    ctx.redirect('/remove');
+}
 
 
 
