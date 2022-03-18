@@ -1,14 +1,15 @@
+//test push
 const dbConnPool = require('./db');
 
 let Stuff = {};
 
-Stuff.add = async (name) => {
+Stuff.add = async(name) => {
     let dbConn = await dbConnPool.getConnection();
     const rows = await dbConn.query("INSERT INTO `stuff` (`name`) VALUES (?);", [name]);
     dbConn.end();
 }
 
-Stuff.get = async () => {
+Stuff.get = async() => {
     let result = [];
 
     let dbConn = await dbConnPool.getConnection();

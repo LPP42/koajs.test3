@@ -1,7 +1,7 @@
 const db = {
     "host": "localhost",
-    "user": "root",
-    "password": "",
+    "user": "Jesse",
+    "password": "BGm5RuHdq*eXUAsl",
     "database": "koajs",
     "connectionLimit": 5
 };
