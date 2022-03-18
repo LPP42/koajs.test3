@@ -33,42 +33,50 @@ router.get('/', index);
 router.get('/add', showAdd);
 router.post('/add', add);
 router.get('/remove', showRemove);
+router.post('/remove', remove);
 
 //Get stuff
-async function index(ctx){
-
-    let listOfStuff =  await stuffModel.get();
-
-    await ctx.render('index',{
-        title: 'such title',
-        //  things: things
+async function index(ctx) {
+    let listOfStuff = await stuffModel.get();
+    await ctx.render('index', {
+        title: 'Here\'s your stuff',
         things: listOfStuff.map(a => a.name)
     });
-    console.log(things);
-    console.log(listOfStuff.map(a => a.name));
 }
 
 //show add page
-async function showAdd(ctx){
+async function showAdd(ctx) {
     await ctx.render('add');
 }
 //add stuff
-async function add(ctx){
+async function add(ctx) {
     const body = ctx.request.body;
     things.push(body.thing);
-    console.log(body.thing);
-    ctx.redirect('/');
+    // console.log(body.thing);
+    ctx.redirect('/add');
 
     await stuffModel.add(body.thing); //add stuff to db 
 
 }
 
 //show remove page
-async function showRemove(ctx){
-    await ctx.render('remove');
+async function showRemove(ctx) {
+    let listOfStuff = await stuffModel.get();
+    await ctx.render('remove', {
+        title: 'Remove items',
+        things: listOfStuff
+    });
 }
 
-router.get('/test', ctx => (ctx.body = 'hello test'));
+//remove stuff
+async function remove(ctx) {
+    const body = ctx.request.body;
+    // console.log(ctx.request.body.idToDelete);
+    await stuffModel.delete(ctx.request.body.idToDelete); //remove stuff to db 
+    ctx.redirect('/remove');
+}
+
+
 
 //router middleware
 app.use(router.routes()).use(router.allowedMethods());

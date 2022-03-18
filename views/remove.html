@@ -1,17 +1,18 @@
-<h1>remove stuff</h1>
+<div class="indexContainer">
+    <div>
+        <h1>remove stuff</h1>
 
-<form action="/remove" method="post">
-    <input type="text" name="thing" placeholder="add some stuff">
-    <input type="submit" value="add">
-
-</form>
-
-<!-- <ul>
-    <% things.forEach(thing => { %>
-        <li>
-            <%= thing %>
-        </li>
-    <% }); %>
-</ul>
-<a href="/">Cancel</a> -->
-<!-- This is a test -->
+        <form action="/remove" method="post">
+            <ul>
+                <input type="hidden" name="idToDelete" id="idToDelete" value="">
+                <% things.forEach(thing=> { %>
+                    <li class="stuffToDelete" id="<%= thing.stuffId %>">
+                        <button class="btnDelete" id="btnDelete" onclick="idToDelete.value='<%= thing.stuffId %>'">Delete</button>
+                        <%= thing.name %>
+                    </li>
+                    <% }); %>
+            </ul>
+        </form>
+        <a href="/" class="cancelButton">Cancel</a>
+    </div>
+</div>
