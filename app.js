@@ -33,12 +33,18 @@ router.get('/', index);
 router.get('/add', showAdd);
 router.post('/add', add);
 
-//list of things
+//Get stuff
 async function index(ctx){
+
+    let listOfStuff =  await stuffModel.get();
+
     await ctx.render('index',{
         title: 'such title',
-        things: things
+        //  things: things
+        things: listOfStuff.map(a => a.name)
     });
+    console.log(things);
+    console.log(listOfStuff.map(a => a.name));
 }
 
 //show add page

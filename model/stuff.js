@@ -2,12 +2,24 @@ const dbConnPool = require('./db');
 
 let Stuff = {};
 
-Stuff.add = async(name)=>{
-    // let result = {};
+Stuff.add = async (name) => {
     let dbConn = await dbConnPool.getConnection();
-    const rows = await dbConn.query("INSERT INTO `stuff` (`name`) VALUES (?);",[name]);
+    const rows = await dbConn.query("INSERT INTO `stuff` (`name`) VALUES (?);", [name]);
     dbConn.end();
-    // return result;
+}
+
+Stuff.get = async () => {
+    let result = [];
+
+    let dbConn = await dbConnPool.getConnection();
+    const rows = await dbConn.query("SELECT stuffId, `name` FROM stuff");
+    dbConn.end();
+
+    if (rows.length > 0) {
+        result = rows;
+    }
+
+    return result;
 }
 
 module.exports = Stuff;
