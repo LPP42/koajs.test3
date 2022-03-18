@@ -1,9 +1,16 @@
-<h1><%- title %></h1>
+<div class="indexContainer">
+    <div>
+        <h1>
+            <%- title %>
+        </h1>
 
-<ul>
-    <% things.forEach(thing => { %>
-        <li>
-            <%= thing %>
-        </li>
-    <% }); %>
-</ul>
+        <ul>
+            <% things.forEach(thing => { %>
+                <li>
+                    <%= thing %>
+                </li>
+                <% }); %>
+        </ul>
+    </div>
+
+</div>
