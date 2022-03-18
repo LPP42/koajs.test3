@@ -32,6 +32,7 @@ render(app, {
 router.get('/', index);
 router.get('/add', showAdd);
 router.post('/add', add);
+router.get('/remove', showRemove);
 
 //Get stuff
 async function index(ctx){
@@ -60,6 +61,11 @@ async function add(ctx){
 
     await stuffModel.add(body.thing); //add stuff to db 
 
+}
+
+//show remove page
+async function showRemove(ctx){
+    await ctx.render('remove');
 }
 
 router.get('/test', ctx => (ctx.body = 'hello test'));
