@@ -6,7 +6,7 @@ users.getUser = async(user) => {
     let result = [];
 
     let dbConn = await dbConnPool.getConnection();
-    const rows = await dbConn.query("SELECT * FROM users WHERE userName = (?)",["admin"]);
+    const rows = await dbConn.query("SELECT * FROM users WHERE userName = (?)",[user]);
 
     dbConn.end();
     if (rows.length > 0) {
