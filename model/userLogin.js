@@ -18,7 +18,6 @@ users.getUser = async(user) => {
     }
     return result;
 }
-<<<<<<< HEAD
 
 users.createUser = async(firstName,lastName,username,password) =>{
     let dbConn = await dbConnPool.getConnection();
@@ -26,6 +25,3 @@ users.createUser = async(firstName,lastName,username,password) =>{
     dbConn.end();
 }
 module.exports = users;
-=======
-module.exports = users;
->>>>>>> Jesse-branch

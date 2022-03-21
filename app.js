@@ -59,7 +59,7 @@ async function showAdd(ctx) {
 //add stuff
 async function add(ctx) {
     const body = ctx.request.body;
-    things.push(body.thing);
+    // things.push(body.thing);
     console.log(body.thing);
 
     if (body.thing !== null && body.thing !== "") {
@@ -94,14 +94,14 @@ async function showLogin(ctx) {
 }
 let getUsername;
 //log into user
-let userId;
+// let userId;
 let userName;
-let userPassword;
+// let userPassword;
 async function getLogin(ctx) {
 
-    console.log(ctx.request.body.UserName);
+    console.log(ctx.request.body.Username);
 
-    getUsername = await userModel.getUser(ctx.request.body.UserName);
+    getUsername = await userModel.getUser(ctx.request.body.Username);
 
     userId = (getUsername.map(a => a.userId));
     userName = (getUsername.map(a => a.userName));
