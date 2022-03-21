@@ -4,17 +4,21 @@ const dbConnPool = require('./db');
 let users = {};
 
 users.getUser = async(user) => {
+
+    console.log("User: ",user)
+
     let result = [];
 
     let dbConn = await dbConnPool.getConnection();
-    const rows = await dbConn.query("SELECT * FROM users WHERE userName = (?)",[user]);
+    const rows = await dbConn.query("SELECT * FROM users WHERE userName = (?)", [user]);
 
     dbConn.end();
     if (rows.length > 0) {
         result = rows;
     }
-   return result;
+    return result;
 }
+<<<<<<< HEAD
 
 users.createUser = async(firstName,lastName,username,password) =>{
     let dbConn = await dbConnPool.getConnection();
@@ -22,3 +26,6 @@ users.createUser = async(firstName,lastName,username,password) =>{
     dbConn.end();
 }
 module.exports = users;
+=======
+module.exports = users;
+>>>>>>> Jesse-branch

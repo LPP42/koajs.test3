@@ -12,6 +12,15 @@ const router = new KoaRouter();
 const stuffModel = require('./model/stuff');
 //for login page
 const userModel = require('./model/userLogin');
+<<<<<<< HEAD
+=======
+
+//this should be the db
+const things = ['chips', 'tacos', 'cheese'];
+
+//
+
+>>>>>>> Jesse-branch
 //bodyparser middleware
 app.use(bodyParser());
 //how the hell do I link css?
@@ -33,8 +42,12 @@ router.get('/remove', showRemove);
 router.post('/remove', remove);
 router.get('/login', showLogin);
 router.post('/login', getLogin);
+<<<<<<< HEAD
 router.get('/createUser', showCreateUser);
 router.post('/createUser', createUser);
+=======
+router.get('/welcomeUser', showWelcome);
+>>>>>>> Jesse-branch
 
 //Get stuff
 async function index(ctx) {
@@ -81,20 +94,41 @@ async function remove(ctx) {
 //show login page
 async function showLogin(ctx) {
     await ctx.render('login', {
-        title: 'Login user'
+        title: 'Login user',
+        userName: getUsername
     });
 }
-
+let getUsername;
 //log into user
+let userId;
+let userName;
+let userPassword;
 async function getLogin(ctx) {
-    let getUsername = await userModel.getUser("admin");
 
+<<<<<<< HEAD
     // console.log(getUsername.map(a => a.userId));
     // console.log(getUsername.map(a => a.userName));
     // console.log(getUsername.map(a => a.userPassword));
 
     ctx.redirect('/login');
+=======
+    console.log(ctx.request.body.UserName);
+>>>>>>> Jesse-branch
 
+    getUsername = await userModel.getUser(ctx.request.body.UserName);
+
+    userId = (getUsername.map(a => a.userId));
+    userName = (getUsername.map(a => a.userName));
+    userPassword = (getUsername.map(a => a.userPassword));
+
+    ctx.redirect('/welcomeUser');
+
+}
+//show welcome
+async function showWelcome(ctx) {
+    await ctx.render('welcomeUser', {
+        userName: userName
+    })
 }
 
 //show create user page
