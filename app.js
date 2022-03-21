@@ -10,6 +10,8 @@ const router = new KoaRouter();
 
 //trying to implement db
 const stuffModel = require('./model/stuff');
+//for login page
+const userModel = require('./model/userLogin');
 
 //this should be the db
 const things = ['chips', 'tacos', 'cheese']
@@ -35,6 +37,7 @@ router.post('/add', add);
 router.get('/remove', showRemove);
 router.post('/remove', remove);
 router.get('/login', showLogin);
+router.post('/login', getLogin);
 
 //Get stuff
 async function index(ctx) {
@@ -82,6 +85,12 @@ async function showLogin(ctx) {
     await ctx.render('login', {
         title: 'Login user'
     });
+}
+
+//log into user
+async function getLogin(ctx) {
+    let getUsername = await userModel.add();
+    console.log(getUsername);
 }
 
 
