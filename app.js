@@ -14,7 +14,9 @@ const stuffModel = require('./model/stuff');
 const userModel = require('./model/userLogin');
 
 //this should be the db
-const things = ['chips', 'tacos', 'cheese']
+const things = ['chips', 'tacos', 'cheese'];
+
+//
 
 //bodyparser middleware
 app.use(bodyParser());
@@ -38,6 +40,7 @@ router.get('/remove', showRemove);
 router.post('/remove', remove);
 router.get('/login', showLogin);
 router.post('/login', getLogin);
+router.get('/welcomeUser', showWelcome);
 
 //Get stuff
 async function index(ctx) {
@@ -83,18 +86,28 @@ async function remove(ctx) {
 //show login page
 async function showLogin(ctx) {
     await ctx.render('login', {
-        title: 'Login user'
+        title: 'Login user',
+        userName: getUsername
     });
 }
-
+let getUsername;
 //log into user
 async function getLogin(ctx) {
-    let getUsername = await userModel.getUser("admin");
-    console.log(getUsername);
-    let getInput = ctx.request.body.userName;
+    getUsername = await userModel.getUser("admin");
+
+    console.log(getUsername.map(a => a.userId));
+    console.log(getUsername.map(a => a.userName));
+    console.log(getUsername.map(a => a.userPassword));
+
+    ctx.redirect('/welcomeUser');
 
 }
-
+//show welcome
+async function showWelcome(ctx) {
+    await ctx.render('welcomeUser', {
+        userName: getUsername
+    })
+}
 
 
 //router middleware
