@@ -93,7 +93,8 @@ async function showLogin(ctx) {
 let getUsername;
 //log into user
 async function getLogin(ctx) {
-    getUsername = await userModel.getUser("admin");
+
+    getUsername = await userModel.getUser(ctx.request.body.userName);
 
     console.log(getUsername.map(a => a.userId));
     console.log(getUsername.map(a => a.userName));
@@ -104,6 +105,7 @@ async function getLogin(ctx) {
 }
 //show welcome
 async function showWelcome(ctx) {
+
     await ctx.render('welcomeUser', {
         userName: getUsername
     })
