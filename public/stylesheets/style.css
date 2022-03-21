@@ -8,7 +8,7 @@ body {
 }
 
 .navLinks {
-    background-color: gray;
+    background-color: rgba(128, 128, 128, .5);
     height: 5vh;
     display: grid;
     grid-template-columns: auto;
@@ -29,9 +29,14 @@ body {
 
 .navLinks>a {
     text-decoration: none;
-    color: black;
-    font-size: large;
+    color: rgb(69, 71, 73);
+    font-size: 22pt;
     text-align: center;
+    margin-top: auto;
+}
+
+.navLinks>a:hover {
+    color: rgb(0, 0, 0);
 }
 
 .indexContainer {
@@ -121,7 +126,7 @@ form {
     height: 5vh;
 }
 
-#btnClass {
+.cancelButton {
     font: bold 11px Arial;
     text-decoration: none;
     background-color: #EEEEEE;

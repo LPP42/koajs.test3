@@ -16,12 +16,9 @@ const userModel = require('./model/userLogin');
 //this should be the db
 const things = ['chips', 'tacos', 'cheese'];
 
-//
-
 //bodyparser middleware
 app.use(bodyParser());
-
-// how the hell do I link css?
+//how the hell do I link css?
 app.use(serve('./public'));
 
 render(app, {
@@ -40,6 +37,8 @@ router.get('/remove', showRemove);
 router.post('/remove', remove);
 router.get('/login', showLogin);
 router.post('/login', getLogin);
+router.get('/createUser', showCreateUser);
+router.post('/createUser', createUser);
 router.get('/welcomeUser', showWelcome);
 
 //Get stuff
@@ -58,12 +57,12 @@ async function showAdd(ctx) {
 //add stuff
 async function add(ctx) {
     const body = ctx.request.body;
-    things.push(body.thing);
-    // console.log(body.thing);
+    console.log(body.thing);
+
+    if (body.thing !== null && body.thing !== "") {
+        await stuffModel.add(body.thing); //add stuff to db 
+    }
     ctx.redirect('/add');
-
-    await stuffModel.add(body.thing); //add stuff to db 
-
 }
 
 //show remove page
@@ -78,7 +77,6 @@ async function showRemove(ctx) {
 //remove stuff
 async function remove(ctx) {
     const body = ctx.request.body;
-    // console.log(ctx.request.body.idToDelete);
     await stuffModel.delete(ctx.request.body.idToDelete); //remove stuff to db 
     ctx.redirect('/remove');
 }
@@ -91,14 +89,16 @@ async function showLogin(ctx) {
     });
 }
 let getUsername;
-//log into user
+let userName;
 async function getLogin(ctx) {
 
-    getUsername = await userModel.getUser(ctx.request.body.userName);
+    console.log(ctx.request.body.Username);
 
-    console.log(getUsername.map(a => a.userId));
-    console.log(getUsername.map(a => a.userName));
-    console.log(getUsername.map(a => a.userPassword));
+    getUsername = await userModel.getUser(ctx.request.body.Username);
+
+    userId = (getUsername.map(a => a.userId));
+    userName = (getUsername.map(a => a.userName));
+    userPassword = (getUsername.map(a => a.userPassword));
 
     ctx.redirect('/welcomeUser');
 
@@ -107,12 +107,33 @@ async function getLogin(ctx) {
 async function showWelcome(ctx) {
 
     await ctx.render('welcomeUser', {
-        userName: getUsername
+        userName: userName
     })
 }
 
+//show create user page
+async function showCreateUser(ctx) {
+    await ctx.render('createUser');
+}
+
+//create and add user to db
+async function createUser(ctx) {
+    const body = ctx.request.body;
+
+    let firstName = ctx.request.body.firstName;
+    let lastName = ctx.request.body.lastName;
+    let username = ctx.request.body.username;
+    let password = ctx.request.body.password;
+    let verifyPassword = ctx.request.body.verifyPassword;
+
+    if (firstName !== "" && firstName.length < 128 && lastName !== "" && lastName.length < 128 && username !== "" && username.length < 50 && password !== "" && password.length < 50 && password === verifyPassword) {
+        await userModel.createUser(firstName, lastName, username, password);
+    } else {
+        console.log("mutchos problemos");
+    }
+    ctx.redirect('/login');
+}
 
 //router middleware
 app.use(router.routes()).use(router.allowedMethods());
-
 app.listen(3000, () => console.log('server started...'));
