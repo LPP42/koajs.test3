@@ -34,6 +34,7 @@ router.get('/add', showAdd);
 router.post('/add', add);
 router.get('/remove', showRemove);
 router.post('/remove', remove);
+router.get('/login', showLogin);
 
 //Get stuff
 async function index(ctx) {
@@ -74,6 +75,13 @@ async function remove(ctx) {
     // console.log(ctx.request.body.idToDelete);
     await stuffModel.delete(ctx.request.body.idToDelete); //remove stuff to db 
     ctx.redirect('/remove');
+}
+
+//show login page
+async function showLogin(ctx) {
+    await ctx.render('login', {
+        title: 'Login user'
+    });
 }
 
 
