@@ -14,7 +14,7 @@ const stuffModel = require('./model/stuff');
 const userModel = require('./model/userLogin');
 //bodyparser middleware
 app.use(bodyParser());
-// how the hell do I link css?
+//how the hell do I link css?
 app.use(serve('./public'));
 
 render(app, {
@@ -33,6 +33,8 @@ router.get('/remove', showRemove);
 router.post('/remove', remove);
 router.get('/login', showLogin);
 router.post('/login', getLogin);
+router.get('/createUser', showCreateUser);
+router.post('/createUser', createUser);
 
 //Get stuff
 async function index(ctx) {
@@ -53,12 +55,10 @@ async function add(ctx) {
     things.push(body.thing);
     console.log(body.thing);
 
-    if(body.thing !== null && body.thing !== ""){
+    if (body.thing !== null && body.thing !== "") {
         await stuffModel.add(body.thing); //add stuff to db 
-
     }
     ctx.redirect('/add');
-
 }
 
 //show remove page
@@ -89,12 +89,39 @@ async function showLogin(ctx) {
 async function getLogin(ctx) {
     let getUsername = await userModel.getUser("admin");
 
-    console.log(getUsername.map(a => a.userId));
-    console.log(getUsername.map(a => a.userName));
-    console.log(getUsername.map(a => a.userPassword));
-    
+    // console.log(getUsername.map(a => a.userId));
+    // console.log(getUsername.map(a => a.userName));
+    // console.log(getUsername.map(a => a.userPassword));
+
     ctx.redirect('/login');
 
+}
+
+//show create user page
+async function showCreateUser(ctx) {
+    await ctx.render('createUser');
+}
+
+//create and add user to db
+async function createUser(ctx) {
+    const body = ctx.request.body;
+
+    let firstName = ctx.request.body.firstName;
+    let lastName = ctx.request.body.lastName;
+    let username = ctx.request.body.username;
+    let password = ctx.request.body.password;
+    let verifyPassword = ctx.request.body.verifyPassword;
+
+
+
+
+    if (firstName !== "" && firstName.length < 128 && lastName !== "" && lastName.length < 128 && username !== "" && username.length < 50 && password !== "" && password.length < 50 && password === verifyPassword) {
+        await userModel.createUser(firstName, lastName, username, password);
+    }
+    else {
+        console.log("mutchos problemos");
+    }
+    ctx.redirect('/login');
 }
 
 
