@@ -8,7 +8,7 @@ Stuff.add = async(name) => {
         const rows = await dbConn.query("INSERT INTO `stuff` (`name`) VALUES (?);", [name]);
         dbConn.end();
     }
-    //this is testing merging
+    
 Stuff.get = async() => {
     let result = [];
 

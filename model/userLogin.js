@@ -8,3 +8,5 @@ users.add = async() => {
     console.log(rows)
     dbConn.end();
 }
+
+module.exports = users;
