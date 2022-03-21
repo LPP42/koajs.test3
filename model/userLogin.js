@@ -3,6 +3,9 @@ const dbConnPool = require('./db');
 let users = {};
 
 users.getUser = async(user) => {
+
+    console.log("User: ",user)
+
     let result = [];
 
     let dbConn = await dbConnPool.getConnection();

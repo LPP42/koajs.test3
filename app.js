@@ -92,12 +92,18 @@ async function showLogin(ctx) {
 }
 let getUsername;
 //log into user
+let userId;
+let userName;
+let userPassword;
 async function getLogin(ctx) {
-    getUsername = await userModel.getUser("admin");
 
-    console.log(getUsername.map(a => a.userId));
-    console.log(getUsername.map(a => a.userName));
-    console.log(getUsername.map(a => a.userPassword));
+    console.log(ctx.request.body.UserName);
+
+    getUsername = await userModel.getUser(ctx.request.body.UserName);
+
+    userId = (getUsername.map(a => a.userId));
+    userName = (getUsername.map(a => a.userName));
+    userPassword = (getUsername.map(a => a.userPassword));
 
     ctx.redirect('/welcomeUser');
 
@@ -105,7 +111,7 @@ async function getLogin(ctx) {
 //show welcome
 async function showWelcome(ctx) {
     await ctx.render('welcomeUser', {
-        userName: getUsername
+        userName: userName
     })
 }
 
