@@ -1,6 +1,7 @@
 body {
     background-color: rgb(29, 29, 29);
     color: rgb(241, 237, 231);
+    overflow-x: hidden;
 }
 
 .navLinks {
@@ -92,6 +93,25 @@ li {
 }
 
 form {
+    padding: 0;
+    margin: 0;
+}
+
+#formLayout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+#formLayout:nth-child(odd) {
+    text-align: center;
+    grid-column: 1/2;
+    padding: 0;
+    margin: 0;
+}
+
+#formLayout:nth-child(even) {
+    text-align: center;
+    grid-column: 2/3;
     padding: 0;
     margin: 0;
 }
