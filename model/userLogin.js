@@ -8,5 +8,6 @@ users.getUser = async(user) => {
 
     console.log(users);
     dbConn.end();
+    return users;
 }
 module.exports = users;

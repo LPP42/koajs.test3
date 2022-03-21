@@ -1,8 +1,10 @@
 body {
     background-color: rgb(29, 29, 29);
-    background-image: url("./img/background.jpg");
+    background-image: url("../img/background.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
     color: rgb(241, 237, 231);
-    overflow-x: hidden;
+    overflow: hidden;
 }
 
 .navLinks {

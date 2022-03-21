@@ -91,6 +91,8 @@ async function showLogin(ctx) {
 async function getLogin(ctx) {
     let getUsername = await userModel.getUser("admin");
     console.log(getUsername);
+    let getInput = ctx.request.body.userName;
+
 }
 
 
