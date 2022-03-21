@@ -16,8 +16,6 @@ const userModel = require('./model/userLogin');
 //this should be the db
 const things = ['chips', 'tacos', 'cheese'];
 
-//
-
 //bodyparser middleware
 app.use(bodyParser());
 //how the hell do I link css?
@@ -59,7 +57,6 @@ async function showAdd(ctx) {
 //add stuff
 async function add(ctx) {
     const body = ctx.request.body;
-    // things.push(body.thing);
     console.log(body.thing);
 
     if (body.thing !== null && body.thing !== "") {
@@ -80,7 +77,6 @@ async function showRemove(ctx) {
 //remove stuff
 async function remove(ctx) {
     const body = ctx.request.body;
-    // console.log(ctx.request.body.idToDelete);
     await stuffModel.delete(ctx.request.body.idToDelete); //remove stuff to db 
     ctx.redirect('/remove');
 }
@@ -93,10 +89,7 @@ async function showLogin(ctx) {
     });
 }
 let getUsername;
-//log into user
-// let userId;
 let userName;
-// let userPassword;
 async function getLogin(ctx) {
 
     console.log(ctx.request.body.Username);
@@ -132,9 +125,6 @@ async function createUser(ctx) {
     let password = ctx.request.body.password;
     let verifyPassword = ctx.request.body.verifyPassword;
 
-
-
-
     if (firstName !== "" && firstName.length < 128 && lastName !== "" && lastName.length < 128 && username !== "" && username.length < 50 && password !== "" && password.length < 50 && password === verifyPassword) {
         await userModel.createUser(firstName, lastName, username, password);
     }
@@ -144,8 +134,6 @@ async function createUser(ctx) {
     ctx.redirect('/login');
 }
 
-
 //router middleware
 app.use(router.routes()).use(router.allowedMethods());
-
 app.listen(3000, () => console.log('server started...'));

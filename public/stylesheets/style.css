@@ -8,7 +8,7 @@ body {
 }
 
 .navLinks {
-    background-color: gray;
+    background-color: rgba(128, 128, 128,.5);
     height: 5vh;
     display: grid;
     grid-template-columns: auto;
@@ -17,6 +17,7 @@ body {
 
 .navLinks>a:nth-child(1) {
     grid-column: 1/2;
+
 }
 
 .navLinks>a:nth-child(2) {
@@ -29,9 +30,15 @@ body {
 
 .navLinks>a {
     text-decoration: none;
-    color: rgb(0, 0, 0);
-    font-size: large;
+    color: rgb(69, 71, 73);
+    font-size: 22pt;
     text-align: center;
+    margin-top: auto;
+}
+.navLinks>a:hover {
+
+    color: rgb(0, 0, 0);
+
 }
 
 .indexContainer {
