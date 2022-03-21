@@ -1,5 +1,6 @@
 body {
     background-color: rgb(29, 29, 29);
+    background-image: url("./img/background.jpg");
     color: rgb(241, 237, 231);
     overflow-x: hidden;
 }
