@@ -89,7 +89,7 @@ async function showLogin(ctx) {
 
 //log into user
 async function getLogin(ctx) {
-    let getUsername = await userModel.getUser(admin);
+    let getUsername = await userModel.getUser("admin");
     console.log(getUsername);
 }
 
