@@ -12,13 +12,8 @@ const router = new KoaRouter();
 const stuffModel = require('./model/stuff');
 //for login page
 const userModel = require('./model/userLogin');
-
-//this should be the db
-const things = ['chips', 'tacos', 'cheese']
-
 //bodyparser middleware
 app.use(bodyParser());
-
 // how the hell do I link css?
 app.use(serve('./public'));
 
