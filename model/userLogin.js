@@ -2,11 +2,16 @@ const dbConnPool = require('./db');
 
 let users = {};
 
-users.add = async() => {
-    let dbConn = await dbConnPool.getConnection();
-    const rows = await dbConn.query("SELECT * FROM `users`;");
-    console.log(rows)
-    dbConn.end();
-}
+users.getUser = async(user) => {
+    let result = [];
 
+    let dbConn = await dbConnPool.getConnection();
+    const rows = await dbConn.query("SELECT * FROM users WHERE userName = (?)",[user]);
+
+    dbConn.end();
+    if (rows.length > 0) {
+        result = rows;
+    }
+   return result;
+}
 module.exports = users;

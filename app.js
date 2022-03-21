@@ -87,10 +87,15 @@ async function showLogin(ctx) {
 
 //log into user
 async function getLogin(ctx) {
-    let getUsername = await userModel.add();
-    console.log(getUsername);
-}
+    let getUsername = await userModel.getUser("admin");
 
+    console.log(getUsername.map(a => a.userId));
+    console.log(getUsername.map(a => a.userName));
+    console.log(getUsername.map(a => a.userPassword));
+    
+    ctx.redirect('/login');
+
+}
 
 
 //router middleware
