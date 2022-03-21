@@ -53,13 +53,8 @@ async function showAdd(ctx) {
 async function add(ctx) {
     const body = ctx.request.body;
     things.push(body.thing);
-<<<<<<< HEAD
     // console.log(body.thing);
     ctx.redirect('/add');
-=======
-   // console.log(body.thing);
-    ctx.redirect('/add');!
->>>>>>> remove
 
     await stuffModel.add(body.thing); //add stuff to db 
 
